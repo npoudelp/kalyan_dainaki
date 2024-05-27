@@ -1,42 +1,65 @@
-import React from 'react'
+import React from "react";
+import { RecentPost } from "./RecentPost";
 
 export const Newpost = () => {
   return (
-    <div>
+    <>
+      <div className="flex justify-evenly  mt-[3em] ">
+        <div>
+          <RecentPost />
+        </div>
 
-<form>
-  <div>
-    <label htmlFor="title">Title</label>
-    <input  type="text" id="title" name="title" typeof=''required />
-  </div>
-  <div>
-    <label htmlFor="content">Content</label>
-    <textarea id="content" name="content"  required></textarea>
-  </div>
-  <div>
-    <label htmlFor="summary">Summary</label>
-    <textarea id="summary" name="summary" ></textarea>
-  </div>
-  <div>
-    <label htmlFor="author_id">Author ID</label>
-    <input type="text" id="author_id" name="author_id" required/>
-  </div>
-  <div>
-    <label htmlFor="image">Image</label>
-    <input type="file" id="image" name="image" accept="image/*" />
-  </div>
-  <div>
-    <label htmlFor="created_at">Created At</label>
-    <input type="datetime-local" id="created_at" name="created_at" required />
-  </div>
-  <div>
-    <label htmlFor="updated_at">Updated At</label>
-    <input type="datetime-local" id="updated_at" name="updated_at" required/>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+        <div className="bg-yellow h-[60em] w-[30em]  border border-black border-black-1 ">
+         <div className='w-full h-[3em] bg-black flex justify-center text-white items-center'>Add New Post</div>
+        
+          <div className="flex mt-[1em] ">
+            <div>
+              <label htmlFor="topic">Topic</label>
 
+              <input
+                type="text"
+                name="topic"
+                id="topic"
+                className="border border-black border-black-1 h-[2em] w-[10em] ml-[5px]"
+              />
+            </div>
 
-    </div>
-  )
-}
+            <div>
+              <div className="ml-[10px]">
+                <label htmlFor="author">Author</label>
+                <input
+                  type=" text"
+                  name="author"
+                  id="author"
+                  className="border border-black border-black-1 h-[2em] w-[10em] ml-[4px]"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="content">Content</label>
+            <input
+              type=" textbox"
+              name="content"
+              id="name"
+              className="border border-black border-black-1 h-[3em] w-[8em]"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="image">Image</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              className="border border-black border-black-1 h-[3em] w-[8em]"
+            />
+          </div>
+        </div>
+
+        <div className="bg-yellow h-[30em] w-[10em]  border border-black border-black-1 "></div>
+      </div>
+    </>
+  );
+};

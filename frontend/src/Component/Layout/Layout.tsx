@@ -8,8 +8,8 @@ export const Layout = () => {
         <div>
           <Navbar/>
          </div>
-        <div>
-           <Outlet/>
+        <div className='bg-slate-300 h-[100vh]'>
+           <Outlet />
          </div>
     </div>
   )
