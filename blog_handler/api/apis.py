@@ -70,7 +70,6 @@ class RegisterUsers(APIView):
             return Response({
                 "status": "User added successfully...",
                 "data": {
-                    "id": NewUser.id,
                     "username": NewUser.username,
                     "email": NewUser.email,
                     "first_name": NewUser.first_name,
@@ -89,7 +88,7 @@ class BlogManager(APIView):
     def get(self, request):
         try:
             GetBlogs = BlogSerializers(Blogs.objects.all().order_by('-id'), many=True)
-            return Response(getBlogs.data)
+            return Response(GetBlogs.data)
         except:
             return Response("Error")
 
@@ -145,9 +144,9 @@ class GetBlogs(APIView):
     permission_classes = []
 
     def get(self, request):
-        # try:
+        try:
             GetBlogs = Blogs.objects.all().order_by('-id')
             GetBlogs = BlogSerializers(GetBlogs, many=True)
             return Response(GetBlogs.data)
-        # except:
-        #     return Response("Error")
+        except:
+            return Response("Error")
