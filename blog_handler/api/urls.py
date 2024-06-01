@@ -6,5 +6,6 @@ urlpatterns = [
     path('catagory/', apis.CatagoryList.as_view(), name='catagory'),
     path('users/', apis.RegisterUsers.as_view(), name='users'),
     path('manage_blogs/', apis.BlogManager.as_view(), name='blog_manager'),
-    path('blogs/', apis.GetBlogs.as_view(), name='view_blog'),
+    path('blogs/', apis.GetAllBlogs.as_view(), name='get_blogs'),
+    path('blogs/<int:id>/', apis.GetBlogById.as_view(), name='get_blog_by_id'),
 ]
