@@ -2,22 +2,31 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Catagory, Blogs
+from django.utils import timezone
 from django.contrib.auth.models import User
 from .serializers import CatagorySerializers , UserSerializers, BlogSerializers
 
 class Home(APIView):
     permission_classes = []
     def get(self, request):
-        return Response("Hello, World!")
+        return Response({
+            "status": "Welcome to blog handler api",
+            "data": {
+                "author": "Group tantraNsa",
+                "email": None,
+                "date": f"{timezone.now().hour}:{timezone.now().minute}:{timezone.now().second}",
+            }
+        })
     
 
 # catagory management
-class CatagoryList(APIView):
+class CatagoryManager(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         GetCatagory = CatagorySerializers(Catagory.objects.all(), many=True)
         return Response(GetCatagory.data)
+
 
     def post(self, request):
         try:
@@ -33,6 +42,7 @@ class CatagoryList(APIView):
         except:
             return Response("Error")
     
+
     def put(self, request):
         try:
             CatagoryData = Catagory.objects.get(id=request.data['id'])
@@ -47,6 +57,7 @@ class CatagoryList(APIView):
                 return Response(CatagoryData.errors)
         except:
             return Response("Error")
+
 
     def delete(self, request):
         try:
@@ -72,6 +83,7 @@ class RegisterUsers(APIView):
         GetUsers = UserSerializers(User.objects.all().order_by('-id'), many=True)
         return Response(GetUsers.data)
     
+
     def post(self, request):
         try:
             UserName = request.data['username']
@@ -89,7 +101,6 @@ class RegisterUsers(APIView):
                     "first_name": NewUser.first_name,
                     "last_name": NewUser.last_name
                 }
-            
             })
         except:
             return Response("Error")
