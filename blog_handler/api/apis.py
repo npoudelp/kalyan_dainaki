@@ -48,6 +48,20 @@ class CatagoryList(APIView):
         except:
             return Response("Error")
 
+    def delete(self, request):
+        try:
+            CatagoryData = Catagory.objects.get(id=request.data['id'])
+            CatagoryData.delete()
+            return Response({
+                "status": "Catagory deleted successfully...",
+                "data": CatagoryData
+            })
+        except:
+            return Response({
+                "status": "Error",
+                "data": "No catagory found with this id"
+            })
+
 
 
 # addign users in database
@@ -136,11 +150,14 @@ class BlogManager(APIView):
                 "data": GetBlog
             })
         except:
-            return Response("Error")
+            return Response({
+                "status": "Error",
+                "data": "No blog found with this id"
+            })
         
 
 #getting all blog
-class GetBlogs(APIView):
+class GetAllBlogs(APIView):
     permission_classes = []
 
     def get(self, request):
@@ -150,3 +167,19 @@ class GetBlogs(APIView):
             return Response(GetBlogs.data)
         except:
             return Response("Error")
+
+
+#getting blog by id
+class GetBlogById(APIView):
+    permission_classes = []
+
+    def get(self, request, id):
+        try:
+            GetBlog = Blogs.objects.get(id=id)
+            GetBlog = BlogSerializers(GetBlog)
+            return Response(GetBlog.data)
+        except:
+            return Response({
+                "status": "Error",
+                "data": "No blog found with this id"
+            })
