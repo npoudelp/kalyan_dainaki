@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Catagory(models.Model):
-    catagoryName = models.CharField(max_length=25)
+    catagoryName = models.CharField(max_length=25, unique=True)
     
     def __str__(self):
         return self.catagoryName
@@ -14,9 +14,9 @@ class Catagory(models.Model):
 class Blogs(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    blogDate = models.DateTimeField(auto_now_add=True)
+    catagory = models.ForeignKey(Catagory, to_field='catagoryName', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
+    blogDate = models.DateTimeField(auto_now_add=True, blank=True)
     image = models.ImageField(upload_to='blog_thumbnails/')
     
     def __str__(self):
