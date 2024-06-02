@@ -218,7 +218,7 @@ class SearchBlog(APIView):
         
 
 # update view count
-class UpdateView(APIView):
+class UpdateViewCount(APIView):
     permission_classes = []
 
     def put(self, request, id):
