@@ -8,4 +8,5 @@ urlpatterns = [
     path('manage_blogs/', apis.BlogManager.as_view(), name='blog_manager'),
     path('blogs/', apis.GetAllBlogs.as_view(), name='get_blogs'),
     path('blogs/<int:id>/', apis.GetBlogById.as_view(), name='get_blog_by_id'),
+    path('blogs/<str:key>/', apis.SearchBlog.as_view(), name='search_blog'),
 ]
