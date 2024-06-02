@@ -18,6 +18,7 @@ class Blogs(models.Model):
     author = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
     blogDate = models.DateTimeField(auto_now_add=True, blank=True)
     image = models.ImageField(upload_to='blog_thumbnails/')
+    views = models.IntegerField(default=0, null=True, blank=True)
     
     def __str__(self):
         return self.title
