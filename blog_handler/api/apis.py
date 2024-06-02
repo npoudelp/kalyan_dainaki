@@ -5,6 +5,7 @@ from .models import Catagory, Blogs
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .serializers import CatagorySerializers , UserSerializers, BlogSerializers
+from django.db.models import Q
 
 class Home(APIView):
     permission_classes = []
@@ -193,4 +194,24 @@ class GetBlogById(APIView):
             return Response({
                 "status": "Error",
                 "data": "No blog found with this id"
+            })
+
+
+# search for blog
+class SearchBlog(APIView):
+    permission_classes = []
+
+    def get(self, request, key):
+        try:
+            GetBlog = Blogs.objects.filter(Q(title__contains=key) | Q(content__contains=key))
+            GetBlog = BlogSerializers(GetBlog, many=True)
+            return Response({
+                "key": key,
+                "data": GetBlog.data
+            
+            })
+        except:
+            return Response({
+                "status": "Error",
+                "data": "No blog found with this title"
             })
