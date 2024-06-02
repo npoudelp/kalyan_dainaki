@@ -9,4 +9,5 @@ urlpatterns = [
     path('blogs/', apis.GetAllBlogs.as_view(), name='get_blogs'),
     path('blogs/<int:id>/', apis.GetBlogById.as_view(), name='get_blog_by_id'),
     path('blogs/<str:key>/', apis.SearchBlog.as_view(), name='search_blog'),
+    path('blogs/<int:id>/add_view/', apis.UpdateView.as_view(), name='update_view'),
 ]
