@@ -215,3 +215,25 @@ class SearchBlog(APIView):
                 "status": "Error",
                 "data": "No blog found with this title"
             })
+        
+
+# update view count
+class UpdateView(APIView):
+    permission_classes = []
+
+    def put(self, request, id):
+        try:
+            GetBlog = Blogs.objects.get(id=id)
+            GetBlog.views += 1
+            GetBlog.save()
+            return Response({
+                "status": "View updated successfully...",
+                "data": GetBlog.views,
+                # "ip": request.META['REMOTE_ADDR'],
+                # "user_agent": request.META['HTTP_USER_AGENT'],
+            })
+        except:
+            return Response({
+                "status": "Error",
+                "data": "No blog found with this id"
+            })
