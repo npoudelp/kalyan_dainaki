@@ -159,7 +159,7 @@ class BlogManager(APIView):
             GetBlog.delete()
             return Response({
                 "status": "Blog deleted successfully...",
-                "data": GetBlog
+                "data": GetBlog,
             })
         except:
             return Response({
@@ -213,7 +213,7 @@ class SearchBlog(APIView):
         except:
             return Response({
                 "status": "Error",
-                "data": "No blog found with this title"
+                "data": "No blog found with this key"
             })
         
 
@@ -229,8 +229,8 @@ class UpdateView(APIView):
             return Response({
                 "status": "View updated successfully...",
                 "data": GetBlog.views,
-                # "ip": request.META['REMOTE_ADDR'],
-                # "user_agent": request.META['HTTP_USER_AGENT'],
+                "ip": request.META['REMOTE_ADDR'],
+                "user_agent": request.META['HTTP_USER_AGENT'],
             })
         except:
             return Response({
