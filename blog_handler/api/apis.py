@@ -107,7 +107,7 @@ class RegisterUsers(APIView):
             return Response("Error")
         
 
-#handeling blogs
+#handeling blogs by admin
 class BlogManager(APIView):
     permission_classes = [IsAuthenticated]
 
