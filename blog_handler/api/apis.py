@@ -250,3 +250,23 @@ class GetBlogsByView(APIView):
             return Response(GetBlog.data)
         except:
             return Response("Error")
+
+
+# get blogs by catagory
+class GetBlogsByCatagory(APIView):
+    permission_classes = []
+
+    def get(self, request, category):
+        try:
+            GetBlog = Blogs.objects.filter(catagory=category)
+            if len(GetBlog) == 0:
+                return Response({
+                    "status": "Error",
+                    "data": "No blog found with this catagory"
+                })
+            GetBlog = BlogSerializers(GetBlog, many=True)
+            return Response(GetBlog.data)
+        except:
+            return Response({
+                "status": "Error"
+            })
