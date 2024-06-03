@@ -237,3 +237,16 @@ class UpdateViewCount(APIView):
                 "status": "Error",
                 "data": "No blog found with this id"
             })
+
+
+# get blogs by view count
+class GetBlogsByView(APIView):
+    permission_classes = []
+
+    def get(self, request):
+        try:
+            GetBlog = Blogs.objects.all().order_by('-views')
+            GetBlog = BlogSerializers(GetBlog, many=True)
+            return Response(GetBlog.data)
+        except:
+            return Response("Error")
