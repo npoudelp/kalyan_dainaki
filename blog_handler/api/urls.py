@@ -11,4 +11,5 @@ urlpatterns = [
     path('blogs/find/<str:key>/', apis.SearchBlog.as_view(), name='search_blog'),
     path('blogs/add_view/<int:id>', apis.UpdateViewCount.as_view(), name='update_view'),
     path('blogs/by_view/', apis.GetBlogsByView.as_view(), name='get_blog_by_view'),
+    path('blogs/by_catagory/<str:category>/', apis.GetBlogsByCatagory.as_view(), name='get_blog_by_catagory'),
 ]
